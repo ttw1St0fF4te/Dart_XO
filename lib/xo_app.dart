@@ -8,13 +8,11 @@ class TicTacToeGame {
   bool isAgainstBot = false;
   Random random = Random();
 
-  // Инициализация игрового поля
   void initializeBoard(int boardSize) {
     size = boardSize;
     board = List.generate(size, (_) => List.generate(size, (_) => '.'));
   }
 
-  // Отображение игрового поля
   void displayBoard() {
     print('  ${List.generate(size, (i) => (i + 1).toString()).join(' ')}');
     for (int i = 0; i < size; i++) {
@@ -26,7 +24,6 @@ class TicTacToeGame {
     }
   }
 
-  // Проверка валидности хода
   bool isValidMove(int row, int col) {
     return row >= 0 && row < size && col >= 0 && col < size && board[row][col] == '.';
   }
@@ -40,7 +37,6 @@ class TicTacToeGame {
     return false;
   }
 
-  // Проверка победы
   bool checkWin(String player) {
     // Проверка строк
     for (int i = 0; i < size; i++) {
@@ -101,7 +97,6 @@ class TicTacToeGame {
     return true;
   }
 
-  // Ход бота (простая стратегия)
   void makeBotMove() {
     // Сначала проверяем, может ли бот выиграть
     for (int i = 0; i < size; i++) {
@@ -111,7 +106,7 @@ class TicTacToeGame {
           if (checkWin('O')) {
             return;
           }
-          board[i][j] = '.'; // Откатываем ход
+          board[i][j] = '.'; 
         }
       }
     }
@@ -125,7 +120,7 @@ class TicTacToeGame {
             board[i][j] = 'O';
             return;
           }
-          board[i][j] = '.'; // Откатываем ход
+          board[i][j] = '.'; 
         }
       }
     }
@@ -146,7 +141,6 @@ class TicTacToeGame {
     }
   }
 
-  // Получение хода от игрока
   List<int>? getPlayerMove() {
     while (true) {
       stdout.write("${currentPlayer}'s turn. Enter row and column (e.g. 1 2): ");
@@ -174,13 +168,11 @@ class TicTacToeGame {
     }
   }
 
-  // Выбор случайного начального игрока
   void chooseRandomStartingPlayer() {
     currentPlayer = random.nextBool() ? 'X' : 'O';
     print("${currentPlayer} will start the game!");
   }
 
-  // Основной игровой цикл
   void playGame() {
     while (true) {
       displayBoard();
@@ -213,9 +205,7 @@ class TicTacToeGame {
     }
   }
 
-  // Запуск новой игры
   void startNewGame() {
-    // Получение размера поля
     while (true) {
       stdout.write("Enter the size of the board (3-9): ");
       String? input = stdin.readLineSync();
@@ -234,7 +224,6 @@ class TicTacToeGame {
       }
     }
 
-    // Выбор режима игры
     while (true) {
       print("\nSelect game mode:");
       print("1. Player vs Player");
@@ -253,10 +242,8 @@ class TicTacToeGame {
       }
     }
 
-    // Выбор случайного начального игрока
     chooseRandomStartingPlayer();
     
-    // Запуск игры
     playGame();
   }
 }
@@ -267,7 +254,6 @@ void runTicTacToe() {
   while (true) {
     game.startNewGame();
     
-    // Спросить, хочет ли игрок сыграть еще раз
     while (true) {
       stdout.write("Do you want to play again? (y/n): ");
       String? input = stdin.readLineSync();
